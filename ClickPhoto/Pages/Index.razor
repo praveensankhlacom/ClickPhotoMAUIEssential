@@ -1,0 +1,24 @@
+﻿@page "/"
+
+<div id="appCapsule">
+    <div class="section mt-5 text-center">
+        @if(ImageUrl != null)
+        {
+            <img src="@ImageUrl" alt="Captured Image" style="max-width: 100%;" />
+        }
+
+        <button @onclick="CaptureImage" class="btn btn-info mt-2">Capture Image</button>
+
+    </div>
+</div>
+
+@code {
+    private string ImageUrl;
+
+    [Inject]
+    private ICameraService CameraService { get; set; }
+    private async Task CaptureImage()
+    {
+        ImageUrl = await CameraService.CapturePhotoAsync();
+    }
+}
